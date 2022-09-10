@@ -1,8 +1,9 @@
-import './App.css';
+import "./App.scss"
 import {BrowserRouter, Route,Routes} from 'react-router-dom'
 import Navbar from './components/Header/code/Navbar';
 import Search from './components/Body/code/Search';
 import Home from './components/Body/code/Home';
+import MovieDetails from "./components/Body/code/MovieDetails";
 function App() {
   return (
     <div className="App">
@@ -10,6 +11,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path='/:collection/:collection_id' element={<MovieDetails/>}/>
 
       </Routes>
 
