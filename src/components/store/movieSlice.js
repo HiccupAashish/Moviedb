@@ -14,17 +14,10 @@ export const getTrendingMovies = createAsyncThunk(
 
 export const getMovieDetails=createAsyncThunk("movie/getMovieDetails",async(obj)=>{
     
-    const res=await fetch(`https://api.themoviedb.org/3/${obj.media_type}/${obj.id}?api_key=d4309b32067c9fd40912bc109c3da02a&language=en-US`).then(res=>res.json())
+    const res=await fetch(`https://api.themoviedb.org/3/${obj.media_type}/${obj.id}?api_key=d4309b32067c9fd40912bc109c3da02a&language=en-US&append_to_response=videos,images`).then(res=>res.json())
     return res;
 })
 
-// export const getMovieDetails=async (detail)=>{  
-//         const res=await fetch(`https://api.themoviedb.org/3/${detail.media_type}/${detail.id}?api_key=d4309b32067c9fd40912bc109c3da02a&language=en-US`).then(res=>res.json())
-//         const data=res
-//         console.log(data)
-//         return data
-    
-// }
 
 const initialState = {
   trendingmovies: null,
@@ -37,14 +30,6 @@ const movieSlice = createSlice({
   reducers: {
     storeTendingMovie: (state, action) => {
       state.trendingmovies = action.payload;
-    },
-
-    getATrendingMovie: (state, action) => {
-      const detail = state.trendingmovies.find(
-        (movie) => movie.id == action.payload
-      );
-     const data= getMovieDetails(detail)
-     state.trendingMovieDetail=data
     },
 
     storeMovieDetails:(state,action)=>{
