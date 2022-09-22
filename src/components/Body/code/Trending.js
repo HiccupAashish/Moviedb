@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTrendingMovies } from '../../store/movieSlice'
-import TrendingBox from './TrendingBox'
+
 import { v4 } from 'uuid'
+import MovieBox from './MovieBox'
 
 export default function Trending() {
   const trendingMovie=useSelector(state=>state.movie.trendingmovies)
@@ -14,7 +15,7 @@ useEffect(()=>{
 
   return (
     <div className="trendingBox">
-   {trendingMovie && trendingMovie.map(movie=>(<TrendingBox key={v4()} movie={movie}/>))  }
+   {trendingMovie && trendingMovie.map(movie=>(<MovieBox key={v4()} movie={movie}/>))  }
     </div>
   )
 }

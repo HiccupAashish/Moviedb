@@ -7,21 +7,26 @@ import { v4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { getMovieDetails } from "../../store/movieSlice";
 
-export default function TrendingBox({ movie }) {
+export default function MovieBox({ movie }) {
   const navigate=useNavigate()
   const dispatch=useDispatch()
 
 
-  function handleClick(media_type,id){
-    console.log(media_type)
-    console.log(id)
-    dispatch(getMovieDetails({media_type,id}))
+  function handleClick(movie){
+    
+    if(movie.media_type){
+      navigate(`/${movie.media_type}/${movie.id}`)
+    }
+    else{
+      navigate(`/movie/${movie.id}`)
+    }
+    
   }
 
   return (
     <div  className="trending_movie_card">
-      <Link style={{textDecoration: 'none', color:'black'}} to={`/${movie.media_type}/${movie.id}`}>
-        <div onClick={()=>handleClick(movie.media_type,movie.id)}  className="image_box">
+      
+        <div onClick={()=>handleClick(movie)}  className="image_box">
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
         </div>
         <div className="trending_title">
@@ -41,12 +46,12 @@ export default function TrendingBox({ movie }) {
             ;
           </div>
           {movie.title ? (
-            <h1>{movie.title}</h1>
+            <p>{movie.title}</p>
           ) : (
-            <h1>{movie.original_name}</h1>
+            <p>{movie.original_name}</p>
           )}
         </div>
-        </Link>
+        
     </div>
   );
 }

@@ -1,7 +1,27 @@
-body{
-    // overflow: hidden;
-    margin: 0 0 0 0;
-    ::-webkit-scrollbar {
-        display: none;
-    }   
+body {
+  // overflow: hidden;
+  margin: 0 0 0 0;
+  color:white;
+  background-color: #333533;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+.trendingBox {
+  display: flex;
+  gap: 1em;
+  height: 20em;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin: 1em 1em;
+}
+.nowShowing{
+    display: flex;
+  gap: 1em;
+  height: 20em;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin: 1em 1em;
 }

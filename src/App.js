@@ -1,10 +1,11 @@
 import "./App.scss"
-import {BrowserRouter, Route,Routes} from 'react-router-dom'
+import {BrowserRouter, Route,Routes, useLocation} from 'react-router-dom'
 import Navbar from './components/Header/code/Navbar';
 import Search from './components/Body/code/Search';
 import Home from './components/Body/code/Home';
 import MovieDetails from "./components/Body/code/MovieDetails";
 function App() {
+  
   return (
     <div className="App">
       <BrowserRouter>

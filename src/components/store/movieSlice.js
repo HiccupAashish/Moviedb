@@ -18,15 +18,27 @@ export const getMovieDetails=createAsyncThunk("movie/getMovieDetails",async(obj)
     return res;
 })
 
+export const searchMovie=createAsyncThunk("movie/searchMovie",async({moviename})=>{
+
+  const res=await fetch(`https://api.themoviedb.org/3/search/movie?api_key=d4309b32067c9fd40912bc109c3da02a&language=en-US&query=${moviename}&page=1`).then(res=>res.json())
+  return res;
+})
+export const nowShowing=createAsyncThunk("movie/nowShowing",async(thunk)=>{
+  const res=await fetch (`https://api.themoviedb.org/3/movie/now_playing?api_key=d4309b32067c9fd40912bc109c3da02a&language=en-US`).then(res=>res.json())
+  return res;
+})
 
 const initialState = {
   trendingmovies: null,
   trendingMovieDetail: null,
+  searchedMovie:null,
+  nowShowing:null,
 };
 
 const movieSlice = createSlice({
   name: "movie",
   initialState,
+
   reducers: {
     storeTendingMovie: (state, action) => {
       state.trendingmovies = action.payload;
@@ -34,6 +46,9 @@ const movieSlice = createSlice({
 
     storeMovieDetails:(state,action)=>{
         state.trendingMovieDetail=action.payload
+    },
+    removeSearchList:(state)=>{
+      state.searchedMovie=null;
     }
 
   },
@@ -55,8 +70,17 @@ const movieSlice = createSlice({
       .addCase(getMovieDetails.fulfilled,(state,action)=>{
         state.trendingMovieDetail=action.payload
       })
+      .addCase(searchMovie.pending,(state,action)=>{
+        state.searchedMovie=null;
+      })
+      .addCase(searchMovie.fulfilled,(state,action)=>{
+        state.searchedMovie=action.payload.results
+      })
+      .addCase(nowShowing.fulfilled,(state,action)=>{
+        state.nowShowing=action.payload.results
+      })
   },
 });
 
-export const { storeTendingMovie,getATrendingMovie,storeMovieDetails } = movieSlice.actions;
+export const { storeTendingMovie,getATrendingMovie,storeMovieDetails,removeSearchList } = movieSlice.actions;
 export default movieSlice.reducer;
