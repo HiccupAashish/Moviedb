@@ -5,14 +5,17 @@ import store from "./components/store/store";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import { MovieProvider } from "./components/Contexts/MovieContext";
+import { AuthProvider } from "./components/Contexts/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <MovieProvider>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </MovieProvider>
+  <AuthProvider>
+    <MovieProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MovieProvider>
+  </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

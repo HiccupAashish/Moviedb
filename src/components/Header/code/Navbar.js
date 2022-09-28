@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { fire } from "../../../Firebase/firebase";
+import { AuthContext } from "../../Contexts/AuthContext";
 import "../styles/Navbar.scss";
 export default function Navbar() {
+  const {currentUser,setCurrentUser}=useContext(AuthContext)
+
+  function handleLogout(){
+    fire.auth().signOut()
+    setCurrentUser("")
+  }
   return (
     <div className="Navbar">
       <h1>
-        Berk<span>Hub</span>
+        Bing<span>Hub</span>
       </h1>
       <div className="movieCollection">
         <p>Movies</p>
         <div className="movieList">
           <ul>
             <li>Popular</li>
-            <li>Now Showing</li>
+            <li>Now&nbsp;Showing</li>
             <li>UpComing</li>
             <li>Top Rated</li>
           </ul>
@@ -19,13 +28,24 @@ export default function Navbar() {
       </div>
 
       <div className="tvCollection">
-        {" "}
+       
         <p>TV Shows</p>
-        <div className="tvList"></div>
+        <div className="tvList">
+          <ul>
+            <li>Popular</li>
+            <li>Airing&nbsp;Today</li>
+            <li>On&nbsp;TV</li>
+            <li>Top&nbsp;Rated</li>
+
+          </ul>
+        </div>
       </div>
 
       <p>People</p>
-      <p>More</p>
+      
+   <Link to="/signup"><p>    Login</p></Link> 
+   {currentUser &&<p onClick={handleLogout}>Logout</p>}
+      
     </div>
   );
 }

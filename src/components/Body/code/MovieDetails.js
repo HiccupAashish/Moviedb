@@ -38,7 +38,7 @@ export default function MovieDetails() {
     setDescriptionColor((prevstate) => [
       ...prevstate,
       hexToRgba(color[0],1),
-      hexToRgba(color[1], 0.8),
+      hexToRgba(color[1], 0.89),
     ]);
   }
 
@@ -92,6 +92,7 @@ export default function MovieDetails() {
                       <div className="overlay">
                         <div className="hiddentext">View Image</div>
                       </div>
+                    
                     </div>
 
                     <div className="detailsBox">
